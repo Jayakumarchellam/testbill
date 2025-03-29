@@ -1,6 +1,16 @@
-from flask import Flask # import Flask in Python
-app = Flask(__name__) # creates an instance of a Flask app
-@app.route('/') # route called by user
-def index(): # function called by '/' route
-    return 'Hello World! This App is built using Flask.'
-app.run(host='0.0.0.0', port=8000) # starts the web app at port 8000
+import os
+
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def hello_world():
+    """Example Hello World route."""
+    name = os.environ.get("NAME", "World")
+    return f"Hello {name}!"
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
