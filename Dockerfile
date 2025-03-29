@@ -1,4 +1,4 @@
-ROM python:3-alpine
+FROM python:3-alpine
 
 # RUN apt-get update -y
 # RUN apt-get install -y python-pip
