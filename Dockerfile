@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3.9
 
 # RUN apt-get update -y
 # RUN apt-get install -y python-pip
@@ -9,6 +9,8 @@ COPY . /app
 WORKDIR /app
 
 RUN pip install --no-cache-dir -r requirements.txt
+RUN wget https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/resolve/main/llama-2-7b-chat.Q4_K_M.gguf
+RUN pip install requests python-dotenv flask flask-cors langchain llama-cpp-python wikipedia-api langchain_community wikipedia gunicorn
 
 RUN chmod 444 app.py
 RUN chmod 444 requirements.txt
