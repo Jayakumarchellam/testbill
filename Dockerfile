@@ -1,5 +1,21 @@
-FROM python:alpine3.7
-COPY requirements.txt /
-RUN pip3 install -r /requirements.txt
-COPY app.py .
-CMD ["gunicorn"  , "-b", "0.0.0.0:8888", "app:app"]
+ROM python:3-alpine
+
+# RUN apt-get update -y
+# RUN apt-get install -y python-pip
+
+COPY . /app
+
+# Create and change to the app directory.
+WORKDIR /app
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN chmod 444 app.py
+RUN chmod 444 requirements.txt
+
+# Service must listen to $PORT environment variable.
+# This default value facilitates local development.
+ENV PORT 8080
+
+# Run the web service on container startup.
+CMD [ "python", "app.py" ]
