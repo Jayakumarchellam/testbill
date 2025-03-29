@@ -97,10 +97,6 @@ agent = initialize_agent(
     verbose=True,
     handle_parsing_errors=True
 )
-@app.before_request
-def remove_ngrpk_warning():
-    request.environ['ngrok-skip-browser-warning'] = 'true'
-
 
 @app.route("/")
 def hello_world():
